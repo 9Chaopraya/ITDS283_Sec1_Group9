@@ -1,4 +1,4 @@
-import 'package:myproject/models/get_items.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +17,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Color.fromARGB(255, 227, 219, 246),
+        title: Text("All Task"),
+      ),
         backgroundColor: Color.fromARGB(255, 227, 219, 246),
         body: StreamBuilder<QuerySnapshot>(
           stream: _usersStream,
@@ -46,9 +51,14 @@ class _HomePageState extends State<HomePage> {
                       final doc = documents[index];
                       final data = doc.data()! as Map<String, dynamic>;
                       return ListTile(
-                        title: Text(data['Name']),
-                        subtitle: Text(data['Date']),
-                      );
+                            title: Text(data['Name']),
+                            subtitle: Text(data['Date']),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
+                                ),
+                                borderRadius: BorderRadius.circular(15.0)),
+                          );
                     },
                   ),
                 ),

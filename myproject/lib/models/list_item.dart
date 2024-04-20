@@ -48,6 +48,7 @@ class _ListItemState extends State<ListItem> {
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: Color.fromARGB(255, 89, 31, 224),
+                title: Text("Create Task", style: TextStyle(color: Colors.white),),
               ),
               body: ListView(
                   padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
@@ -78,6 +79,14 @@ class _ListItemState extends State<ListItem> {
                                 "Name":myName.text,
                                 "Date":myDate.text,
                               });
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text("Add Expense Complete",style: TextStyle(color: Colors.white),),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor:
+                                    Color.fromARGB(255, 79, 9, 244),
+                                elevation: 0,
+                              ));
 
                               await Navigator.push(
                                   context,
