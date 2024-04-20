@@ -25,18 +25,18 @@ class _CalendarPageState extends State<CalendarPage> {
   final EasyInfiniteDateTimelineController _controller =
       EasyInfiniteDateTimelineController();
   
-  EasyInfiniteDateTimeLine d=
-  EasyInfiniteDateTimeLine(
-    // controller = const _controller,
-    firstDate: DateTime(2023),
-    focusDate: _focusDate,
-    lastDate: DateTime(2023, 12, 31),
-    onDateChange: (selectedDate) {
-      setState(() {
-        _focusDate = selectedDate;
-      });
-    },
-  ),
+  // EasyInfiniteDateTimeLine d=
+  // EasyInfiniteDateTimeLine(
+  //   // controller = const _controller,
+  //   firstDate: DateTime(2023),
+  //   focusDate: _focusDate,
+  //   lastDate: DateTime(2023, 12, 31),
+  //   onDateChange: (selectedDate) {
+  //     setState(() {
+  //       _focusDate = selectedDate;
+  //     });
+  //   },
+  // ),
 
   @override
   Widget build(BuildContext context) {
@@ -89,12 +89,12 @@ class _CalendarPageState extends State<CalendarPage> {
                 // Add your custom widgets here (e.g., Text, ElevatedButton, etc.)
                 EasyInfiniteDateTimeLine(
                   firstDate: DateTime(2024),
-                  focusDate: _focusDate,
+                  focusDate: DateTime.now(),
                   lastDate: DateTime(2025),
                   controller: _controller,
                   onDateChange: (selectedDate) {
                     //
-                    _focusDate = selectedDate;
+                    // _focusDate = selectedDate;
 
                     // myDay = selectedDate.toString();
                     // myDay = myDay.substring(0, 11);
