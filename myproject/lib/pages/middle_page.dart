@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-// import 'package:sec1_group9/pages/home_page.dart';
+import 'package:myproject/pages/home_page.dart';
 // import 'package:sec1_group9/pages/money_page.dart';
 // import 'package:sec1_group9/pages/setting_page.dart';
-// import 'package:sec1_group9/pages/calendar_page.dart';
+import 'package:myproject/pages/calendar_page.dart';
 import 'package:myproject/pages/login_page.dart';
+import 'package:myproject/pages/register_page.dart';
 // import 'package:sec1_group9/pages/register_page.dart';
 // // import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:myproject/pages/setting_page.dart';
+import 'package:myproject/models/get_items.dart';
 
 class MiddlePage extends StatefulWidget {
   const MiddlePage({super.key});
@@ -22,18 +24,18 @@ class _MiddlePageState extends State<MiddlePage> {
   Widget bodyFunction() {
     switch (_page) {
       case 0:
-        return const LoginPage();
+        return const HomePage();
         break;
-      // case 1:
-      //   return CalendarPage();
-      //   break;
+      case 1:
+        return const CalendarPage();
+        break;
       // case 2:
       //   return MoneyPage();
       //   break;
-      // case 3:
-      //   return SettingPage();
+      case 3:
+        return const SettingPage();
       default:
-        return const LoginPage();
+        return const HomePage();
         break;
     }
   }
@@ -43,14 +45,13 @@ class _MiddlePageState extends State<MiddlePage> {
     // _getCategories();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Hello User')),
       body: bodyFunction(),
       bottomNavigationBar: GNav(
           backgroundColor: const Color.fromARGB(255, 79, 9, 244),
           color: Colors.white,
           activeColor: Colors.white,
           tabBackgroundColor: const Color.fromARGB(255, 134, 104, 209),
-          gap: 8,
+          gap: 1,
           onTabChange: (index) {
             setState(() {
               _page = index;
@@ -71,7 +72,7 @@ class _MiddlePageState extends State<MiddlePage> {
             ),
             GButton(
               icon: Icons.settings,
-              text: 'setting',
+              text: 'Setting',
             ),
           ]),
     );

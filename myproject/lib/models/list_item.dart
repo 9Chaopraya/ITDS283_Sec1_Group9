@@ -1,36 +1,121 @@
+import 'package:flutter/material.dart';
+import 'package:myproject/pages/calendar_page.dart';
+import 'package:myproject/pages/login_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myproject/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:myproject/pages/middle_page.dart';
 
-class Item_model {
-  String name;
-  String date;
-  // TimeOfDay start_time;
-  // TimeOfDay end_time;
-  String description;
-  String category;
+class ListItem extends StatefulWidget {
+  const ListItem({super.key});
 
-  Item_model(
-      {required this.name,
-      required this.date,
-      required this.description,
-      required this.category});
+  @override
+  State<ListItem> createState() => _ListItemState();
+}
 
-  static List<Item_model> getItem() {
-    List<Item_model> Items = [];
-    Items.add(Item_model(
-        name: "Meeting with P Tim",
-        date: "1944-06-06",
-        description: "a",
-        category: "Meeting"));
-    Items.add(Item_model(
-        name: "Meeting with P Sub",
-        date: "1944-06-06",
-        description: "b",
-        category: "Meeting"));
-    Items.add(Item_model(
-        name: "Meeting with P Saw",
-        date: "1944-06-06",
-        description: "c",
-        category: "Meeting"));
+class _ListItemState extends State<ListItem> {
+  final Future<FirebaseApp> firebase = Firebase.initializeApp();
+  CollectionReference _item = FirebaseFirestore.instance.collection('items');
 
-    return Items;
+  final TextEditingController myName = TextEditingController();
+
+  final TextEditingController myDate = TextEditingController();
+
+  @override
+  void dispose() {
+    myName.dispose();
+    myDate.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+    return FutureBuilder(
+        future: firebase,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Scaffold(
+                appBar: AppBar(title: const Text('Errorja')),
+                body: Center(
+                  child: Text("${snapshot.error}"),
+                ));
+          }
+          // if (snapshot.connectionState == ConnectionState.done) {
+          return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Color.fromARGB(255, 89, 31, 224),
+              ),
+              body: ListView(
+                  padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Padding(padding: EdgeInsets.only(top: 20.0)),
+                        TextField(
+                          controller: myName,
+                          decoration: InputDecoration(
+                            label: Text("Name"),
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(top: 20.0)),
+                        TextField(
+                          controller: myDate,
+                          decoration: InputDecoration(
+                            label: Text("Date"),
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(top: 20.0)),
+                        ElevatedButton(
+                          onPressed: () async {
+                            try {
+                              await _item.add({
+                                "Name":myName.text,
+                                "Date":myDate.text,
+                              });
+
+                              await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const MiddlePage()));
+                            } on FirebaseAuthException catch (e) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text(
+                                    "Error"),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor:
+                                    Color.fromARGB(255, 79, 9, 244),
+                                elevation: 0,
+                              ));
+                              print(e.code);
+                              print(e.message);
+                            }
+
+                            //navigate
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(300.0, 50),
+                            backgroundColor:
+                                const Color.fromARGB(255, 79, 9, 244),
+                          ),
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        
+                      ],
+                    ),
+                  ]));
+          // }
+        });
   }
 }

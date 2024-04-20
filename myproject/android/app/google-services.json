@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "96845289438",
+    "project_id": "timetask-4dde2",
+    "storage_bucket": "timetask-4dde2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96845289438:android:90c60ff6ed0161f5d2ef4f",
+        "android_client_info": {
+          "package_name": "com.example.myproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96845289438-r9qqfqbkr97bpq7q5g6pbjaigvci8bqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-TYx5wgqO5g7AuAHXT3kMeHFoaCFnu5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96845289438-r9qqfqbkr97bpq7q5g6pbjaigvci8bqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
